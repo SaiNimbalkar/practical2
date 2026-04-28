@@ -11,6 +11,7 @@ def home():
 @app.route('/register', methods=['POST'])
 def register():
     data = request.form
+    
 
     user_data = {
         "name": data.get('fullname'),
@@ -19,7 +20,9 @@ def register():
         "course": data.get('course'),
         "country": data.get('country')
     }
-
+    if not data.get('email'):
+        return "Email is required"
+    
     print("User Registered:", user_data)
 
     return jsonify({"message": "Registration Successful!", "data": user_data})
